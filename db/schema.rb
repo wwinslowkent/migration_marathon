@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105154146) do
+ActiveRecord::Schema.define(version: 20170105164329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,15 @@ ActiveRecord::Schema.define(version: 20170105154146) do
   end
 
   create_table "checkouts", force: :cascade do |t|
-    t.integer "book_id", null: false
+    t.integer "book_id",   null: false
+    t.integer "reader_id"
   end
 
+  create_table "readers", force: :cascade do |t|
+    t.string "name",         null: false
+    t.string "email",        null: false
+    t.string "phone_number", null: false
+  end
+
+  add_foreign_key "checkouts", "readers"
 end
